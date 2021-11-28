@@ -25,7 +25,7 @@ experience:
   - title: Data Analyst
     company: Disney
     company_url: ''
-    company_logo: org-gc
+    company_logo: disney
     location: Washington
     date_start: '2021-10-01'
     date_end: ''
@@ -39,7 +39,7 @@ experience:
   - title: Coordinator of Analytics- Player Development 
     company: Cincinnati Reds
     company_url: ''
-    company_logo: org-x
+    company_logo: reds
     location: Cincinnati
     date_start: '2019-11-01'
     date_end: '2020-09-01'
