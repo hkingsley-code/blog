@@ -10,7 +10,7 @@ email: "harriskingsley3419@gmail.com"
 highlight_name: true
 interests:
 - Sports Analytics
-- Bayesuab Statistics
+- Bayesian Statistics
 - Causal Inference
 organizations:
 - name: Disney
