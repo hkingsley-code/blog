@@ -29,7 +29,7 @@ feature:
   icon_pack: fab
   name: Python
 - description: 30%
-  icon: fa-mountain
+  icon: hiking
   icon_pack: fas
   name: Backpacking 
 

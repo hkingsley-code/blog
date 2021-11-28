@@ -43,7 +43,7 @@ experience:
     location: Cincinnati
     date_start: '2019-11-01'
     date_end: '2020-09-01'
-    description: Lead all Analytics Effors in the Player Development Deparment. 
+    description: Lead all Analytics Efforts in the Player Development Deparment. 
 
 design:
   columns: '2'
