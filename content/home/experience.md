@@ -51,7 +51,6 @@ experience:
         * Build R packages, review code, and create unit tests 
         * Communicate with and understand the needs of minor league coaches to ensure we are maximizing the usefulness of our tools and reports 
         * Collaborate with Data Engineers to maintain the accuracy and timeliness of our data ingestion 
-
   - title: Data Analyst - Player Development 
     company: Cincinnati Reds
     company_url: ''
@@ -65,15 +64,16 @@ experience:
         *	Evaluate players using statistical methods and suggest specific areas for improvement 
         *	Create statistical models using R to estimate future performance 
         *	Create automated data visualizations, reports, and dashboards
-
- - title: Quantative Analysis Intern 
+ - title: Quantitative Analysis Intern 
     company: Los Angeles Angels
     company_url: ''
     company_logo: angels
     location: Los Angeles
     date_start: '2018-09-01'
     date_end: '2018-01-01'
-    description: 
+    description: |2-
+      Responsibilities include:
+      
       *	Create statistical models and applications using Python to aid the baseball operations staff
       *	Query relevant information and organize data using SQL
 design:
