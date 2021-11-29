@@ -62,20 +62,7 @@ experience:
        Responsibilities include: 
         *	Explore, clean, and analyze a large number of unique datasets from third party sources 
         *	Evaluate players using statistical methods and suggest specific areas for improvement 
-        *	Create statistical models using R to estimate future performance 
-        *	Create automated data visualizations, reports, and dashboards
- - title: Quantitative Analysis Intern 
-    company: Los Angeles Angels
-    company_url: ''
-    company_logo: angels
-    location: Los Angeles
-    date_start: '2018-09-01'
-    date_end: '2018-01-01'
-    description: |2-
-      Responsibilities include:
-      
-      *	Create statistical models and applications using Python to aid the baseball operations staff
-      *	Query relevant information and organize data using SQL
+
 design:
   columns: '2'
 ---
