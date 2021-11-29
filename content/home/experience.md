@@ -45,12 +45,12 @@ experience:
     date_end: '2021-09-01'
     description: |2-
        Responsibilities include:
-        *	Execute all responsibilities of Data Analyst in addition to Coordinator roles 
-	      * Coordinate all projects and tools relating to Player Development for the Analytics Department 
-	      * Hire, train, and manage all minor league pitch tracking operators 
-	      * Build R packages, review code, and create unit tests 
-	      * Communicate with and understand the needs of minor league coaches to ensure we are maximizing the usefulness of our tools and reports 
-	      * Collaborate with Data Engineers to maintain the accuracy and timeliness of our data ingestion 
+        * Execute all responsibilities of Data Analyst in addition to Coordinator roles 
+        * Coordinate all projects and tools relating to Player Development for the Analytics Department 
+        * Hire, train, and manage all minor league pitch tracking operators 
+        * Build R packages, review code, and create unit tests 
+        * Communicate with and understand the needs of minor league coaches to ensure we are maximizing the usefulness of our tools and reports 
+        * Collaborate with Data Engineers to maintain the accuracy and timeliness of our data ingestion 
 
   - title: Data Analyst - Player Development 
     company: Cincinnati Reds
