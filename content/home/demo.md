@@ -28,7 +28,7 @@ design:
     padding: ["20px", "0", "20px", "0"]
 ---
 
-Welcome to my website!. I built this website using Hugu and the R package Blogdown. Check out a guide [here](https://bookdown.org/yihui/blogdown/ ) and feel free to reach out if you are wanting to build your own website. Browse the rest of the site to learn more about me and to check out some my blog posts and apps. 
+Welcome to my website. I built this website using Hugo and the R package Blogdown. Check out a guide [here](https://bookdown.org/yihui/blogdown/ ) and feel free to reach out if you are wanting to build your own website. Browse the rest of the site to learn more about me and to check out some my blog posts and apps. 
 
 
 
