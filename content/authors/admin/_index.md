@@ -36,6 +36,6 @@ superuser: true
 title: Harris Kingsley
 ---
 
-Harris Kingsley is a Data Analyst at Disney, focused on consumer insights on the Hulu Platform. 
+Harris Kingsley is a Data Analyst at Disney, focused on consumer insights on the Hulu Platform. He currently lives in Port Angeles, WA. 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume.pdf" "newtab" >}}resumé{{< /staticref >}}.

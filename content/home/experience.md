@@ -32,19 +32,50 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Analysing
-        * Modelling
-        * Deploying
-        
+        * Writing Complex queries in Snowflake to gather information across the Hulu Platform 
+        * Create Dashboards in Tableau to help provide insights to stakeholders
+        * Manage Git repository and act as the team's code manager
+        * Write R code to create repetable analysis 
   - title: Coordinator of Analytics- Player Development 
     company: Cincinnati Reds
     company_url: ''
     company_logo: reds
     location: Cincinnati
-    date_start: '2019-11-01'
-    date_end: '2020-09-01'
-    description: Lead all Analytics Efforts in the Player Development Deparment. 
+    date_start: '2020-11-01'
+    date_end: '2021-09-01'
+    description: |2-
+       Responsibilities include:
+        *	Execute all responsibilities of Data Analyst in addition to Coordinator roles 
+	      * Coordinate all projects and tools relating to Player Development for the Analytics Department 
+	      * Hire, train, and manage all minor league pitch tracking operators 
+	      * Build R packages, review code, and create unit tests 
+	      * Communicate with and understand the needs of minor league coaches to ensure we are maximizing the usefulness of our tools and reports 
+	      * Collaborate with Data Engineers to maintain the accuracy and timeliness of our data ingestion 
 
+  - title: Data Analyst - Player Development 
+    company: Cincinnati Reds
+    company_url: ''
+    company_logo: reds
+    location: Cincinnati
+    date_start: '2019-02-01'
+    date_end: '2020-11-01'
+    description: |2-
+       Responsibilities include: 
+        *	Explore, clean, and analyze a large number of unique datasets from third party sources 
+        *	Evaluate players using statistical methods and suggest specific areas for improvement 
+        *	Create statistical models using R to estimate future performance 
+        *	Create automated data visualizations, reports, and dashboards
+
+ - title: Quantative Analysis Intern 
+    company: Los Angeles Angels
+    company_url: ''
+    company_logo: angels
+    location: Los Angeles
+    date_start: '2018-09-01'
+    date_end: '2018-01-01'
+    description: 
+      *	Create statistical models and applications using Python to aid the baseball operations staff
+      *	Query relevant information and organize data using SQL
 design:
   columns: '2'
 ---
