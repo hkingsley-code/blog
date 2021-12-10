@@ -35,7 +35,7 @@ experience:
         * Writing Complex queries in Snowflake to gather information across the Hulu Platform 
         * Create Dashboards in Tableau to help provide insights to stakeholders
         * Manage Git repository and act as the team's code manager
-        * Write R code to create repetable analysis 
+        * Write R code to create repeatable analysis 
   - title: Coordinator of Analytics- Player Development 
     company: Cincinnati Reds
     company_url: ''
