@@ -34,7 +34,7 @@ feature:
   name: Backpacking 
 - description: 90%
   icon: git
-  icon_pack: fas
+  icon_pack: fab
   name: Git 
 - description: 100%
   icon: sql
