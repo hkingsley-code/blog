@@ -32,6 +32,14 @@ feature:
   icon: hiking
   icon_pack: fas
   name: Backpacking 
+- description: 90%
+  icon: git
+  icon_pack: fas
+  name: Git 
+- description: 100%
+  icon: sql
+  name: SQL 
+  
 
 
 # Uncomment to use emoji icons.
