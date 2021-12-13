@@ -21,25 +21,52 @@ feature:
   icon_pack: fab
   name: R
 - description: 100%
+  icon: r-project
+  icon_pack: fab
+  icon: placeholder
+  name: Shiny
+- description: 100%
   icon: chart-line
   icon_pack: fas
   name: Statistics
+- description: 100%
+  icon: database
+  icon_pack: fas
+  name: SQL
 - description: 50%
   icon: python
   icon_pack: fab
   name: Python
+- description: 90%
+  icon: git
+  icon_pack: fab
+  name: Git  
+- description: 100%
+  icon: snowflake
+  icon_pack: fas
+  name: Snowflake 
+- description: 100%
+  icon: sever
+  icon_pack: fas
+  name: Looker 
+- description: 100%
+  icon: chart-bar
+  icon_pack: fas
+  name: Tableau   
+- description: 100%
+  icon: project-diagram
+  icon_pack: fas
+  name: Agile     
+- description: 100%
+  icon: user-tie
+  icon_pack: fas
+  name: Management    
 - description: 30%
   icon: hiking
   icon_pack: fas
   name: Backpacking 
-- description: 90%
-  icon: git
-  icon_pack: fab
-  name: Git 
-- description: 100%
-  icon: sql
-  name: SQL 
-  
+
+   
 
 
 # Uncomment to use emoji icons.
