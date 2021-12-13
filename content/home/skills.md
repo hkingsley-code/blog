@@ -23,7 +23,6 @@ feature:
 - description: 100%
   icon: r-project
   icon_pack: fab
-  icon: placeholder
   name: Shiny
 - description: 100%
   icon: chart-line
@@ -46,18 +45,18 @@ feature:
   icon_pack: fas
   name: Snowflake 
 - description: 100%
-  icon: sever
+  icon: server
   icon_pack: fas
   name: Looker 
-- description: 100%
+- description: 50%
   icon: chart-bar
   icon_pack: fas
   name: Tableau   
-- description: 100%
+- description: 80%
   icon: project-diagram
   icon_pack: fas
   name: Agile     
-- description: 100%
+- description: 60%
   icon: user-tie
   icon_pack: fas
   name: Management    
