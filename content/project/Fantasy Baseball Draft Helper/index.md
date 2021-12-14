@@ -5,5 +5,5 @@ image:
 summary: A shiny app to help with fantasy baseball drafts. I built this in 2017... so not 100% operational anymore 
 tags:
 - Demo
-title: External Project
+title: Fantasy Baseball Draft Helper
 ---
