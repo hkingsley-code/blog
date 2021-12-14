@@ -1,6 +1,5 @@
 ---
-bio: My research interests include Sports Analytics, Bayesian statistics, Causal Inference 
-  matter.
+bio: My research interests include Sports Analytics, Bayesian statistics, Causal Inference
 education:
   courses:
   - course: BSc in Statistics
