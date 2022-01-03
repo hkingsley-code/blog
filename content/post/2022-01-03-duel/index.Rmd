@@ -19,6 +19,7 @@ duel_game <- read_sheet("https://docs.google.com/spreadsheets/d/1wC3KUIt7DSZ4vM8
 Inspired by a [reddit post](https://www.reddit.com/r/boardgames/comments/ru9ij9/patchwork_duel_data_viz/), I decided to see how my wife and I have been doing playing 7 Wonders Duel. Here is the original author's [code](https://github.com/emilynordmann/theaplotalypse) as well as [mine](https://github.com/hkingsley-code/blog/blob/main/content/post/2022-01-03-duel/index.Rmd). 
 
 
+
 ```{r,  echo=FALSE, warning= FALSE, message = FALSE }
 # Set up colours for the graphs
 duel_colours_2 <- c("#FF7433", "#3348FF")
