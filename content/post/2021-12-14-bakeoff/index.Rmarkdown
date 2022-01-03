@@ -1,0 +1,78 @@
+---
+title: Bakeoff
+author: ''
+date: '2021-12-14'
+slug: bakeoff
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2021-12-14T10:51:50-08:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+```{r}
+# install.packages("remotes")
+#remotes::install_github("apreshill/bakeoff")
+library(bakeoff)
+baker_results <- bakeoff::baker_results
+episode_results <- bakeoff::episode_results
+challenge_results <- bakeoff::challenge_results
+ratings_seasons <- bakeoff::ratings_seasons
+
+## lets fix the star baker numbers
+
+library(dplyr)
+stars <- episode_results%>%
+  filter(!is.na(sb_name))%>%
+  group_by(sb_name)%>%
+  summarise(SB = n())
+  
+baker_results <- baker_results%>%
+  left_join(stars, by = c( "baker" = "sb_name"))
+
+
+
+
+
+
+
+
+## for baker results 
+## focus in on series winners - see if technical median is predictive, see if wins is predictive, 
+## see if you can predict episode length 
+## plot all technical results of winners 
+## look at varience of techincal finishes for top finsihers
+
+## show just summary stats of winners 
+## plot where bakers are from
+## make note of star backer count being blank 
+
+
+## predict winner with just final three using logit star baker count and tecincal median score. maybe also techincal wins 
+
+```
+```{r}
+library(dplyr)
+winners <- baker_results %>% 
+  filter(series_winner == 1)
+
+
+```
+```{r}
+library(ggplot2)
+ggplot(baker_results, aes(x = SB ))+
+  geom_histogram()
+
+
+
+```
+
+
+
+
