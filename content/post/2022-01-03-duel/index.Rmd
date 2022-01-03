@@ -16,7 +16,7 @@ library(waffle)
 library(magick)
 duel_game <- read_sheet("https://docs.google.com/spreadsheets/d/1wC3KUIt7DSZ4vM8FKZFDmqa0BDT8uB1IbaCuIMnLzCI/edit?usp=sharing")
 ```
-Inspired by a [reddit post](https://www.reddit.com/r/boardgames/comments/ru9ij9/patchwork_duel_data_viz/), I decided to see how my wife and I have been doing playing 7 Wonders Duel. 
+Inspired by a [reddit post](https://www.reddit.com/r/boardgames/comments/ru9ij9/patchwork_duel_data_viz/), I decided to see how my wife and I have been doing playing 7 Wonders Duel. Here is the original author's [code](https://github.com/emilynordmann/theaplotalypse) as well as [mine](https://github.com/hkingsley-code/blog/blob/main/content/post/2022-01-03-duel/index.Rmd). 
 
 
 ```{r,  echo=FALSE, warning= FALSE, message = FALSE }
@@ -129,7 +129,7 @@ p2 <- duel_game %>%
 
 
 
-```{r, echo=FALSE, warning=FALSE, FALSE}
+```{r, echo=FALSE, warning=FALSE, message = FALSE}
 #Strategy - where does each player get their points from?
 
 p3 <- duel_game %>%
