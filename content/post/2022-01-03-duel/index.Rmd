@@ -5,7 +5,7 @@ date: "2022-01-03"
 output: html_document
 ---
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(googlesheets4)
 library(extrafont)
 library(tidyverse)
@@ -16,16 +16,17 @@ library(waffle)
 library(magick)
 duel_game <- read_sheet("https://docs.google.com/spreadsheets/d/1wC3KUIt7DSZ4vM8FKZFDmqa0BDT8uB1IbaCuIMnLzCI/edit?usp=sharing")
 ```
+Inspired by a [reddit post](https://www.reddit.com/r/boardgames/comments/ru9ij9/patchwork_duel_data_viz/), I decided to see how my wife and I have been doing playing 7 Wonders Duel. 
 
+
+```{r,  echo=FALSE, warning= FALSE, message = FALSE }
 # Set up colours for the graphs
-
-```{r}
-duel_colours_2 <- c("#24756E", "#FDE98A")
+duel_colours_2 <- c("#FF7433", "#3348FF")
 ```
 
-# Theme stuff
 
-```{r}
+```{r,  echo=FALSE, warning=FALSE, message=FALSE}
+# Theme stuff
 my_theme <- theme(plot.title = element_text(size=20, 
                                             family = "Verdana", 
                                             face = "bold", 
@@ -44,7 +45,7 @@ my_theme <- theme(plot.title = element_text(size=20,
 ```
 
 
-```{r}
+```{r,  echo=FALSE, warning=FALSE, message=FALSE}
 # calculate percent wins for each player
 overall_wins <- duel_game %>%
   group_by(WINNER) %>%
@@ -69,9 +70,10 @@ category_wins <- duel_game %>%
 ```
 
 
-Waffle plot - who wins Duel?
 
-```{r}
+
+```{r,  echo=FALSE, warning=FALSE, message=FALSE}
+#Waffle plot - who wins Duel?
 p1 <- duel_game %>%
   count(WINNER) %>%
   ggplot(aes(fill = WINNER, values = n)) +
@@ -101,11 +103,13 @@ p1 <- duel_game %>%
   my_theme
 ```
 
-Type of wins
 
-When a player wins, how do they win?
+```{r, echo=FALSE, warning=FALSE, message = FALSE}
+#Type of wins
 
-```{r}
+#When a player wins, how do they win?
+
+
 p2 <- duel_game %>%
   group_by(WINNER, VICTORY_TYPE) %>%
   count() %>%
@@ -124,9 +128,10 @@ p2 <- duel_game %>%
 ```
 
 
-Strategy - where does each player get their points from?
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, FALSE}
+#Strategy - where does each player get their points from?
+
 p3 <- duel_game %>%
   filter(VICTORY_TYPE == "Points") %>%
   pivot_longer(cols = `BLUE_C`:`TOTAL_H`, names_to = "type", values_to = "Points") %>%
@@ -138,31 +143,30 @@ p3 <- duel_game %>%
   geom_col(position = "dodge", colour = "black") +
   coord_flip() +
   labs(x = NULL, y = "Average points per game", title = "Winning Strategies",
-       subtitle = "Where does each player get their points from when they win?")d +
+       subtitle = "Where does each player get their points?") +
   scale_fill_manual(values = duel_colours_2, 
                     name = "Player", 
                     labels = c(c("Harris", "Charlotte"))) +
   my_theme
 ```
 
-Put it all together
 
 
-```{r}
-logo <- image_read("duel.jpg") # from magick
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE }
+#Put it all together
+logo <- image_read("duel-logo.jpg") # from magick
 # stitch together plots using patchwork
 p4 <- ggplot() +
   background_image(logo) + # from ggpubr
-  labs(title = "Game 2: Duel",
+  labs(title = "7 Wonders Duel",
        subtitle = paste0("Games = ", nrow(duel_game))) +
   coord_fixed() +
   my_theme
 p4 + p2 + p1 + p3 +
   plot_layout(ncol = 2, 
               nrow = 2, 
-              widths = c(2,2)) +
-  plot_annotation(
-  caption = '@emilynordmann'
-) 
-ggsave(filename = "duel_full.png", width = 10, height = 10)
+              widths = c(2,2),
+              heights = c(4,8,4,8)) 
+#ggsave(filename = "duel_full.png", width = 10, height = 10)
 ```
