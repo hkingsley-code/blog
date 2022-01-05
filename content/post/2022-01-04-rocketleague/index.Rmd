@@ -32,6 +32,7 @@ ggplot(rl_long, aes(x= Rank, y = Goals, fill = Rank ))+
   theme_minimal()+
   coord_flip()+
   theme(legend.position = "none") + 
+  ggtitle("Goals Per Game") + 
   scale_fill_manual(values = c("GC" = "#E73E95", "Champ" = "#C628D5", "Diamond" = "#154ADE", "Plat" = "#15CADE", "Gold"= "#DEA415", "Silver" = "#8CA0A5", "Bronze" = "#9A5E0D")  ) +
   draw_image("grand_champ.jpg", x = 6.5, y = 0.2, scale = 1)+
   draw_image("champ.jpg", x = 5.5, y = 0.2, scale = 1.2)+
@@ -70,7 +71,11 @@ build_df <- function(lambda) {
   grid <- as.data.frame(expand.grid(times, diff))
   colnames(grid) <- c("Time", "Diff")
   grid$Prob <- mapply(calc_prob_tie, diff = grid$Diff, lambda = lambda * grid$Time)
-  return(grid%>% tidyr::pivot_wider(names_from = Diff, values_from = Prob))  
+  grid <- grid%>% 
+    tidyr::pivot_wider(names_from = Diff, values_from = Prob)%>%
+    select(-Time)
+      
+  return(grid) 
 }
 
 
@@ -80,7 +85,7 @@ build_df <- function(lambda) {
 
 ```{r pressure, echo=FALSE, fig.height=20, fig.width= 12}
 library(gridExtra)
-plot_list <- lapply( rl_long$goals_per_minute,  function(x) gridExtra::tableGrob(build_df(x), rows = NULL))
+plot_list <- lapply( rl_long$goals_per_minute,  function(x) gridExtra::tableGrob(build_df(x), rows = c("4:00", "3:00", "2:00", "1:00" , "0:30")))
 rl_long <- rl_long%>%arrange(Rank)
 lab_vector <- paste( rl_long$Mode, rl_long$Rank)
 cowplot::plot_grid(plotlist = plot_list, ncol = 3, nrow = 7, byrow = FALSE, labels = lab_vector)
