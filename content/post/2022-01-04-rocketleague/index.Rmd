@@ -19,6 +19,8 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
+library(magick)
+library(cowplot)
 rl_long<- rl%>%
   tidyr::pivot_longer(cols = Bronze:GC, values_to = "Goals", names_to = "Rank")%>%
   mutate(Rank = factor(Rank, levels = c("Bronze", "Silver", "Gold", "Plat", "Diamond", "Champ", "GC")),
@@ -30,7 +32,14 @@ ggplot(rl_long, aes(x= Rank, y = Goals, fill = Rank ))+
   theme_minimal()+
   coord_flip()+
   theme(legend.position = "none") + 
-  draw_image()+
+  scale_fill_manual(values = c("GC" = "#E73E95", "Champ" = "#C628D5", "Diamond" = "#154ADE", "Plat" = "#15CADE", "Gold"= "#DEA415", "Silver" = "#8CA0A5", "Bronze" = "#9A5E0D")  ) +
+  draw_image("grand_champ.jpg", x = 6.5, y = 0.2, scale = 1)+
+  draw_image("champ.jpg", x = 5.5, y = 0.2, scale = 1.2)+
+  draw_image("diamand.jpg", x = 4.5, y = 0.2, scale =  1.2)+
+  draw_image("plat.jpg", x = 3.5, y = 0.2, scale = 1.2)+
+  draw_image("gold.jpg", x = 2.5, y = 0.2, scale = 1.2)+
+  draw_image("silver.jpg", x = 1.5, y = 0.2, scale = 1.2)+
+  draw_image("bronze.jpg", x = 0.5, y = 0.2, scale = 1.2)+
   facet_wrap(~Mode)
 ```
 
