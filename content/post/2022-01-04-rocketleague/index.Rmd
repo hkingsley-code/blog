@@ -1,0 +1,83 @@
+---
+title: "Rocket League"
+author: "Harris Kingsley"
+date: "1/4/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+rl <- read.csv("stats.csv")
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+rl_long<- rl%>%
+  tidyr::pivot_longer(cols = Bronze:GC, values_to = "Goals", names_to = "Rank")%>%
+  mutate(Rank = factor(Rank, levels = c("Bronze", "Silver", "Gold", "Plat", "Diamond", "Champ", "GC")),
+         Mode = factor(Mode, levels = c("Solo", "Duos", "Trios"))
+         )
+## add axis labels and maybe logos 
+ggplot(rl_long, aes(x= Rank, y = Goals, fill = Rank ))+
+  geom_bar(stat = "identity")+
+  theme_minimal()+
+  coord_flip()+
+  theme(legend.position = "none") + 
+  draw_image()+
+  facet_wrap(~Mode)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+rl_long <- rl_long%>%
+  mutate(goals_per_minute = Goals / 5)
+  
+# diff: how many goals the team is down by 
+# lambda: how many expected goals in the given time frame for both teams 
+# limit: how many goals to search through
+calc_prob_tie <- function(diff, lambda, limit = 10) {
+  diff <- diff * -1 
+  goal_seq <- diff:limit
+  probs <- sapply(goal_seq, function(x) {dpois(x, lambda) })
+  probs_less <-  sapply(goal_seq - diff , function(x) {ppois(x, lambda, lower.tail = T) })
+  return(round(sum(probs * probs_less) * 100,0))
+}  
+  
+#lambda is goal per minute
+build_df <- function(lambda) {
+  
+  times <- c(4,3,2,1,.5)
+  diff <- -4:4
+  grid <- as.data.frame(expand.grid(times, diff))
+  colnames(grid) <- c("Time", "Diff")
+  grid$Prob <- mapply(calc_prob_tie, diff = grid$Diff, lambda = lambda * grid$Time)
+  return(grid%>% tidyr::pivot_wider(names_from = Diff, values_from = Prob))  
+}
+
+
+
+
+```
+
+```{r pressure, echo=FALSE, fig.height=20, fig.width= 12}
+library(gridExtra)
+plot_list <- lapply( rl_long$goals_per_minute,  function(x) gridExtra::tableGrob(build_df(x), rows = NULL))
+rl_long <- rl_long%>%arrange(Rank)
+lab_vector <- paste( rl_long$Mode, rl_long$Rank)
+cowplot::plot_grid(plotlist = plot_list, ncol = 3, nrow = 7, byrow = FALSE, labels = lab_vector)
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
