@@ -1,0 +1,20 @@
+---
+title: "When Should You Forfeit in Rocket League?"
+author: "Harris Kingsley"
+date: "2021-01-06"
+output: html_document
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>Since the pandemic started I’ve been playing more and more Rocket League, a video game which is essentially soccer with cars. . Unfortunately, I’m not a great player and I often end up in game situations where I’m losing by multiple goals. While games in Rocket League aren’t particularly long, they usually last about 8 minutes or so, the game does give you an option to forfeit your match early. This begs the question: at what point is the game hopeless and forfeiting makes sense?<br />
+<br />
+To begin to answer this question I needed to gain a deeper understanding of the Rocket League scoring environment. There are 3 main game modes in Rocket League; singles, duos, and trios. Additionally players are split up into one of 7 ranks based on their skill level. These range from Bronze (the lowest) to Grand Champion. Each of these rank and game mode combinations have their own scoring environment. Pulling population level data in Rocket League was tricky. From my research it appears the developers have been promising a public API for some time but I could not find a way to access it as of yet. Luckily when this game belonged to an old publisher they did have public data and the website <a href="https://ballchasing.com/population/distribution">ballchasing.com</a> published a lot of that older data. So this data is from games a little over a year ago. While its not current its the best I was able to track down and I have no reason to believe this data has dramatically changed. Below is chart with average total goals scored per game across all ranks and game modes.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Now that we have the average goals per game we can start to do the work of finding when forfeiting makes sense. We can use the <a href="https://en.wikipedia.org/wiki/Poisson_distribution">poisson distribution</a> with the average goals per game data to find the probability of winning a game or at least forcing OT based on how much time is left and how many goals a team is losing by. We treat the average goals per game as the lamda for the poisson distribution and adjust down linearly based on how much game time is left. This distribution is best as allows us to get a probability distribution of discrete events (goals scored) based on a certain lamda (average goals scored in a given time frame).<br />
+<br />
+If you are interested in reading more about the methodology my full, heavily commented, code can me found on my github. Below is the result of using the poisson method on all game modes and ranks. The columns of the tables are the goal differential at your current point in time. The rows are the time remaining in the game. The values are the probability that your team forces OT or wins the game in regulation. For example for Duo Plat (my favorite game mode and my rank) if my teammate and I were losing by 2 (-2 differential) with 2 minutes left in the game we would still have a 14% of at least tying the game. I probably wouldn’t forfeit in that situation, but if we give up another goal then our odds fall to just 4%.<br />
+<br />
+The big assumption here is that both teams are equally good. I believe the ranks in rocket league do a good job of splitting players into appropriate skill levels, however teamwork is incredibly important in duos and trios and some teammates may work together better than others. This may effect your decision to forfeit or not but I believe that these probabilities can be used as a useful baseline.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="1152" /></p>

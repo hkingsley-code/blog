@@ -1,30 +1,33 @@
 ---
 title: "When Should You Forfeit in Rocket League?"
 author: "Harris Kingsley"
-date: "1/4/2022"
+date: "2021-01-06"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
 library(ggplot2)
 library(dplyr)
+library(magick)
+library(cowplot)
+library(gridExtra)
 rl <- read.csv("stats.csv")
 
 ```
 
-Since the pandemic started I've been playing more and more Rocket League, a video game which is essentially soccer with cars. . Unfortunately, I'm not a great player and I often end up in game situations where I'm losing by multiple goals. While games in Rocket League aren't particularly long, they usually last about 8 minutes or so, the game does give you an option to forfeit your match early. This begs the question : at what point is the game hopeless and forfeiting makes sense? \
+Since the pandemic started I've been playing more and more Rocket League, a video game which is essentially soccer with cars. . Unfortunately, I'm not a great player and I often end up in game situations where I'm losing by multiple goals. While games in Rocket League aren't particularly long, they usually last about 8 minutes or so, the game does give you an option to forfeit your match early. This begs the question: at what point is the game hopeless and forfeiting makes sense? \
 \
-To begin to answer this question I needed to gain a deeper understanding of the Rocket League scoring envioment. There are 3 main game modes in Rocket League; singles, duos, and trios. Additionally players are split up into one of 7 ranks based on their skill level. These range from Bronze (the lowest) to Grand Champion. Each of these rank and game mode combinations have their own scoring environment. Pulling population level data in Rocket League was tricky. From my research it appears the developers have been promising a public API for some time but I could not find a way to access it as of yet. Luckily when this game belonged to an old publisher they did have public data and the website (ballchasing.com)\[ <https://ballchasing.com/population/distribution>\] published a lot of that older data. So this data is from games a little over a year ago and are not current its the best I was able to track down and I have no reason to believe this data has dramatically changed. Below is chart with average total goals scored per game across all ranks and game modes.
+To begin to answer this question I needed to gain a deeper understanding of the Rocket League scoring environment. There are 3 main game modes in Rocket League; singles, duos, and trios. Additionally players are split up into one of 7 ranks based on their skill level. These range from Bronze (the lowest) to Grand Champion. Each of these rank and game mode combinations have their own scoring environment. Pulling population level data in Rocket League was tricky. From my research it appears the developers have been promising a public API for some time but I could not find a way to access it as of yet. Luckily when this game belonged to an old publisher they did have public data and the website [ballchasing.com](https://ballchasing.com/population/distribution) published a lot of that older data. So this data is from games a little over a year ago. While its not current its the best I was able to track down and I have no reason to believe this data has dramatically changed. Below is chart with average total goals scored per game across all ranks and game modes.
 
-```{r cars}
-library(magick)
-library(cowplot)
+```{r , echo = FALSE, warning = FALSE, message = FALSE}
+## pivot the data to long form, this makes plotting a lot easier.
+## refactoring the rank and mode ensure plot is in expected order
 rl_long<- rl%>%
   tidyr::pivot_longer(cols = Bronze:GC, values_to = "Goals", names_to = "Rank")%>%
   mutate(Rank = factor(Rank, levels = c("Bronze", "Silver", "Gold", "Plat", "Diamond", "Champ", "GC")),
          Mode = factor(Mode, levels = c("Solo", "Duos", "Trios"))
          )
-## add axis labels and maybe logos 
+## create bar plot. Manually filled colors to match rank colors 
 ggplot(rl_long, aes(x= Rank, y = Goals, fill = Rank ))+
   geom_bar(stat = "identity")+
   theme_minimal()+
@@ -42,53 +45,64 @@ ggplot(rl_long, aes(x= Rank, y = Goals, fill = Rank ))+
   facet_wrap(~Mode)
 ```
 
-Now that we have the average goals per game we can start to do the work of finding when forfeiting makes sense. We can use the [poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution) with the average goals per game data to find the probability of winning a game or at least forcing OT based on how much time is left and how many goals a team is losing by. We treat the average goals per game as the lamda for the poisson distribution and adjust down linearly based on how much game time is left. This distribution is best as allows us to get a probability distribution of discrete events (goals scored) best on a certain lamda (average goals scored in a given time frame). \
+Now that we have the average goals per game we can start to do the work of finding when forfeiting makes sense. We can use the [poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution) with the average goals per game data to find the probability of winning a game or at least forcing OT based on how much time is left and how many goals a team is losing by. We treat the average goals per game as the lamda for the poisson distribution and adjust down linearly based on how much game time is left. This distribution is best as allows us to get a probability distribution of discrete events (goals scored) based on a certain lamda (average goals scored in a given time frame). \
 \
-If you are interested any more in the methodology my full code can me found on my github. Below is the result of using the possion mehod on all game modes and ranks. The columns of the tables are the goal differential at your current point in time. The rows is the time remaining in the game. The values are the probability that your team forces OT or wins the game in regulation. For example for Duo Plat (my favorite and my rank) if my teammate and I were losing by 2 (-2 differnational) with 2 minutes left in the game we would still have a 14% of at least tieing the game. I probably wouldn't forfeit in that situtation, but if we give up another goal then our odds fall to just 4%. \
+If you are interested in reading more about the methodology my full, heavily commented, code can me found on my github. Below is the result of using the poisson method on all game modes and ranks. The columns of the tables are the goal differential at your current point in time. The rows are the time remaining in the game. The values are the probability that your team forces OT or wins the game in regulation. For example for Duo Plat (my favorite game mode and my rank) if my teammate and I were losing by 2 (-2 differential) with 2 minutes left in the game we would still have a 14% of at least tying the game. I probably wouldn't forfeit in that situation, but if we give up another goal then our odds fall to just 4%. \
 \
-The big assumption here is that both teams are equally good. I believe the ranks in rocket league do a good job of splitting players into approriate skill levels, however teamwork is incredibly important in duos and trios and some teammates may work together better than others. \
-\
+The big assumption here is that both teams are equally good. I believe the ranks in rocket league do a good job of splitting players into appropriate skill levels, however teamwork is incredibly important in duos and trios and some teammates may work together better than others. This may effect your decision to forfeit or not but I believe that these probabilities can be used as a useful baseline.
 
-```{r pressure, echo=FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+# add a new column to rl_long. Its easier to work with the lamda if its in a goal per minute setting  
 rl_long <- rl_long%>%
   mutate(goals_per_minute = Goals / 5)
-  
+
+# function to calculate the probabilty of tie or greater  
 # diff: how many goals the team is down by 
 # lambda: how many expected goals in the given time frame for both teams 
-# limit: how many goals to search through
+# limit: how many goals to search through. 
+# The limit is needed as a sort of a hack. We want to know the probabilty that a player will beat the goal differential but we don't want to assume that the other team scores 0 goals. The limit helps account for that but caps how far we search. For example if score diff is -2 it will compare the prob of scoring 2 goals with the other team scoring 0. Then it will compare scoring 3 with the other team scoring <=1 goals and so forth up to the limit. There is certaintly a better mathmatical way to handle this but I didn't remmeber how to do that and this handles it quickly and accuratly enough. 
+
 calc_prob_tie <- function(diff, lambda, limit = 10) {
-  diff <- diff * -1 
-  goal_seq <- diff:limit
-  probs <- sapply(goal_seq, function(x) {dpois(x, lambda) })
-  probs_less <-  sapply(goal_seq - diff , function(x) {ppois(x, lambda, lower.tail = T) })
+  diff <- diff * -1 # flipping it is easier for calculation
+  goal_seq <- diff:limit #amont of goal possibilties for team of interest 
+  probs <- sapply(goal_seq, function(x) {dpois(x, lambda) }) # find the probabilty of scoring a certain amount of goals throughout all of goal seq
+  probs_less <-  sapply(goal_seq - diff , function(x) {ppois(x,  lambda, lower.tail = T) }) # find the probs of the other team scoring goals - diff or less
+  
+  # multiply and sum all the probabilty together and get final clean result 
   return(round(sum(probs * probs_less) * 100,0))
 }  
   
-#lambda is goal per minute
+#builds a dataframe of comeback probs for goal diffs -4,4 and time 4:.5 for a given lambda
+#lambda is goal per minute in this case 
 build_df <- function(lambda) {
   
-  times <- c(4,3,2,1,.5)
-  diff <- -4:4
+  times <- c(4,3,2,1,.5) #time left in game
+  diff <- -4:4 #goal diffs to look over 
+   
+  #create dataframe with all combos
   grid <- as.data.frame(expand.grid(times, diff))
   colnames(grid) <- c("Time", "Diff")
+ 
+  #apply probabilty calculation to all combos. Lamda gets multiplied by time because it is set as goals per minute
   grid$Prob <- mapply(calc_prob_tie, diff = grid$Diff, lambda = lambda * grid$Time)
   grid <- grid%>% 
     tidyr::pivot_wider(names_from = Diff, values_from = Prob)%>%
     select(-Time)
-      
   return(grid) 
 }
 
 
-
-
 ```
 
-```{r pressure, echo=FALSE, fig.height=20, fig.width= 12}
-library(gridExtra)
+```{r, echo = FALSE, warning = FALSE, message = FALSE, fig.height=20, fig.width= 12}
+#create a list of all plots for all lamdas in the dataset
 plot_list <- lapply( rl_long$goals_per_minute,  function(x) gridExtra::tableGrob(build_df(x), rows = c("4:00", "3:00", "2:00", "1:00" , "0:30")))
+
+#vector of plot labels 
 rl_long <- rl_long%>%arrange(Rank)
 lab_vector <- paste( rl_long$Mode, rl_long$Rank)
+
+#use cowplots to put all the plots in plotlist together. 
 cowplot::plot_grid(plotlist = plot_list, ncol = 3, nrow = 7, byrow = FALSE, labels = lab_vector)
 
 
