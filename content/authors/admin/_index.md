@@ -12,9 +12,9 @@ interests:
 - Bayesian Statistics
 - Causal Inference
 organizations:
-- name: Disney
+- name: Nike
   url: 
-role: Data Analyst - Hulu Consumer Insights
+role: Data Analytics Manager
 social:
 - icon: envelope
   icon_pack: fas
@@ -35,6 +35,6 @@ superuser: true
 title: Harris Kingsley
 ---
 
-Harris Kingsley is a Data Analyst at Disney, focused on consumer insights on the Hulu Platform. He currently lives in Port Angeles, WA. 
+Harris Kingsley is a Data Analytics Manager at Nike, focused on the consumer journey across all of Nike's applications. He currently lives in Port Angeles, WA. 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
