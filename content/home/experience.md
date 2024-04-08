@@ -22,15 +22,34 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-  - title: Data Analytics Manager
+  - title: Data Scientist II
     company: Nike
+    company_url: ''
+    company_logo: nike
+    location: Portland, OR
+    date_start: '2022-09-01'
+    date_end: ''
+    description: |2-
+        Responsibilities include:
+        * Data Science lead on a global cross-functional project. Forecast the future health of footwear franchises using machine learning and an innovative scoring system. 
+        * Developed and maintain a model to predict return rate for specific products 
+        * Presented work in front of 300+ people at Nike Consumer Insights Combine
+        * Maintain frontend and backend of multiple Tableau dashboards
+        * Ad-Hoc analysis using SQL, R, and Shiny to support multiple business-facing stakeholders
+        * Establish data best practices on team including version control and code review
+  - title: Data Scientist
+    company: Nike - Contract
     company_url: ''
     company_logo: nike
     location: Washington
     date_start: '2022-02-01'
-    date_end: ''
+    date_end: '2022-09-01'
     description: |2-
-  - title: Data Analyst
+        Responsibilities include:
+        * Assist in the development of a Bayesian Marketing Mix Model to understand impact of different advertisement campaigns across Nike’s digital platforms 
+        * Create datasets and data pipelines in Databricks using Python and SQL
+        * Be a marketing data expert and help establish actionable KPI’s for multiple teams
+  - title: Senior Data Analyst
     company: Disney - Contract
     company_url: ''
     company_logo: disney
@@ -60,7 +79,7 @@ experience:
         * Collaborate with Data Engineers to maintain the accuracy and timeliness of our data ingestion 
         * Serve as main project manager for all Player Development software applications
         * Continue to execute all Data Analyst duties
-  - title: Data Analyst - Player Development 
+  - title: Data Scientist - Player Development 
     company: Cincinnati Reds
     company_url: ''
     company_logo: reds

@@ -14,7 +14,7 @@ interests:
 organizations:
 - name: Nike
   url: 
-role: Data Analytics Manager
+role: Data Scientist II
 social:
 - icon: envelope
   icon_pack: fas
@@ -35,6 +35,6 @@ superuser: true
 title: Harris Kingsley
 ---
 
-Harris Kingsley is a Data Analytics Manager at Nike, focused on the consumer journey across all of Nike's applications. He currently lives in Port Angeles, WA. 
+Harris Kingsley is a Data Scientist II at Nike, focused on the consumer journey across all of Nike's applications. He currently lives in Portland, OR. 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
